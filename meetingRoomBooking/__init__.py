@@ -2,7 +2,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-from flask_script import Manager
 from flask_migrate import Migrate
 
 
@@ -12,7 +11,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://yuhrdsirwpolco:7aea924be590a
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-manager = Manager(app)
 
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)

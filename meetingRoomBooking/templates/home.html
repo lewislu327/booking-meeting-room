@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block content%}
+<div class="container d-flex justify-content-center">
+  <div class="list-group col-auto">
+    <div class="d-flex justify-content-center my-3 ">
+      <form action="/">
+        <div class="form-group mb-2">
+          <input type="date" class="form-control" name="date" placeholder="月份" onchange="submit()" value="{{date}}">
+        </div>
+        
+      </form>
+    </div>
+    <div class="total d-flex justify-content-end">
+      <h5 class="my-2 ms-2">現在時間:&nbsp;&nbsp;</h5>
+      <div class="totalamount d-flex justify-content-end">
+        <h4 id="clock"></h4>
+      </div>
+    </div>
+    
+    
+    <div class="row expense mt-2" style="width:600px">  
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">預約日期</th>
+            <th scope="col">會議室</th>
+            <th scope="col">開始時段</th>
+            <th scope="col">結束時段</th>
+            <th scope="col">登記人</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          {% for room in rooms%}
+          <tr>
+            <th scope="row">{{room.id}}</th>
+            <td>{{room.date}}</td>
+            <td>{{room.roomName}}</td>
+            <td>{{room.start_at}}</td>
+            <td>{{room.end_at}}</td>
+            <td>{{room.roomUser.username}}</td>
+            {% if room.roomUser == current_user %}
+              <td>
+                <a class="btn btn-light" style="background-color: #e3e3e0" href="{{url_for('edit_room', room_id=room.id)}}">編輯</a>
+                <form action="{{url_for('delete_room', room_id=room.id)}}" method="POST" style="display:inline;">
+                  <button class="btn btn-light" style="background-color: #e3e3e0" type="submit">刪除</button>
+                </form>
+              </td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>  
+      </table>
+    </div>
+    
+    <div class="create-btn mt-3 text-center">
+      <a class="btn btn-success w-50" href="/new">會議室預約</a>
+    </div>
+  </div>
+</div>
+{% endblock content%}

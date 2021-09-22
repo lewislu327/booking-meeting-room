@@ -11,7 +11,7 @@ from datetime import date
 def home():
     today = date.today()
     rooms = Room.query.filter(Room.date == today).order_by(
-        Room.start_at.desc()).all()
+        Room.start_at.asc()).all()
     searchDate = request.args.get('date')
     if searchDate:
         rooms = Room.query.filter(Room.date == searchDate).all()

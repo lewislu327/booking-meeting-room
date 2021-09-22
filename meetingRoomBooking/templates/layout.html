@@ -25,6 +25,9 @@
           <li class="nav-item">
             {% if current_user.is_authenticated %}
             <span><a href="/total" class="ms-2" style="color:black;text-decoration:none">全部預約紀錄</a></span>
+            {% if current_user.role == "Admin" %}
+            <span><a href="/users" class="ms-2" style="color:black;text-decoration:none">使用者清單</a></span>
+            {% endif %}
             {% endif %}
           </li>
         </ul>

@@ -24,6 +24,13 @@ def total():
     rooms = Room.query.order_by(Room.date.desc()).all()
     return render_template('home.html', rooms=rooms)
 
+@app.route("/users")
+@login_required
+def admin_users():
+    users = User.query.all()
+    return render_template('home.html', users=users)
+
+
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:

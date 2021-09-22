@@ -17,8 +17,9 @@
       </div>
     </div>
     
+    {% if rooms %}
     
-    <div class="row expense mt-2" style="width:600px">  
+    <div class="row records mt-2" style="width:600px">  
       <table class="table">
         <thead>
           <tr>
@@ -54,10 +55,40 @@
         </tbody>  
       </table>
     </div>
-    
+
     <div class="create-btn mt-3 text-center">
       <a class="btn btn-success w-50" href="/new">會議室預約</a>
     </div>
+    {% endif %}
+
+    {% if users %}
+    
+    <div class="row records mt-2" style="width:600px">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">使用者名稱</th>
+            <th scope="col">Email</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+    
+        <tbody>
+          {% for user in users%}
+          <tr>
+            <th scope="row">{{user.id}}</th>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.role}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+
+   
   </div>
 </div>
 {% endblock content%}
